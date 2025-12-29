@@ -1,143 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VericureLab</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: #333; }
-    a { text-decoration: none; color: inherit; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #0a2540; color: #fff; position: sticky; top: 0; z-index: 100; }
-    nav .logo { font-size: 1.5rem; font-weight: bold; }
-    nav ul { display: flex; list-style: none; }
-    nav ul li { margin-left: 1.5rem; }
-    nav ul li a { color: #fff; font-weight: 500; transition: 0.3s; }
-    nav ul li a:hover { color: #00aaff; }
-    .hero { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100vh; background: linear-gradient(to right, #e1f0ff, #ffffff); padding: 0 2rem; }
-    .hero h1 { font-size: 3rem; margin-bottom: 1rem; color: #0a2540; animation: fadeInDown 1s ease forwards; }
-    .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 700px; animation: fadeInUp 1s ease forwards 0.5s; opacity:0; }
-    .hero button { padding: 0.8rem 2rem; background: #0a2540; color: #fff; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; transition: 0.3s; animation: fadeInUp 1s ease forwards 1s; opacity:0; }
-    .hero button:hover { background: #07315f; }
-    @keyframes fadeInDown { from { opacity:0; transform: translateY(-20px);} to {opacity:1; transform: translateY(0);} }
-    @keyframes fadeInUp { from { opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
-    section { padding: 4rem 2rem; }
-    section h2 { text-align: center; margin-bottom: 2rem; font-size: 2rem; color: #0a2540; }
-    .about { background: #f9f9f9; }
-    .about-content { max-width: 900px; margin: auto; text-align: center; }
-    .services { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-    .service-card { background: #fff; border-radius: 10px; padding: 2rem; width: 250px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
-    .service-card i { font-size: 2rem; color: #00aaff; margin-bottom: 1rem; }
-    .service-card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-    .team { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-    .member { text-align: center; width: 200px; transition: transform 0.3s; }
-    .member img { width: 100%; border-radius: 50%; margin-bottom: 1rem; }
-    .member:hover { transform: translateY(-10px); }
-    .contact iframe { width: 100%; border: none; min-height: 800px; }
-    .thank-message { display: none; text-align: center; font-size: 1.2rem; color: #0a2540; margin-top: 1rem; font-weight: bold; }
-    footer { background: #0a2540; color: #fff; text-align: center; padding: 2rem 0; }
-    @media (max-width: 768px) {
-      .services, .team { flex-direction: column; align-items: center; }
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1rem; }
-      .contact iframe { min-height: 700px; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 1.5rem; }
-      .hero p { font-size: 0.9rem; }
-      .contact iframe { min-height: 650px; }
-    }
-    /* Welcome Popup */
-    #welcomePopup {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center;
-      z-index: 9999; text-align: center; color: #fff; font-size: 1.5rem; flex-direction: column;
-    }
-    #welcomePopup div { background: #0a2540; padding: 2rem; border-radius: 10px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VericureLab | HealthTech & AI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Roboto,sans-serif;line-height:1.6;color:#333}
+a{text-decoration:none;color:inherit}
+section{padding:4rem 2rem}
+h2{text-align:center;margin-bottom:2rem;color:#0a2540}
+
+nav{
+background:#0a2540;color:#fff;
+display:flex;justify-content:space-between;
+padding:1rem 2rem;position:sticky;top:0
+}
+nav ul{list-style:none;display:flex}
+nav li{margin-left:1.2rem}
+nav a:hover{color:#00aaff}
+
+.welcome{
+background:#00aaff;color:#fff;
+text-align:center;padding:.6rem;font-weight:bold
+}
+
+.hero{
+height:90vh;display:flex;
+flex-direction:column;justify-content:center;
+align-items:center;text-align:center;
+background:linear-gradient(to right,#e1f0ff,#fff)
+}
+.hero h1{font-size:2.8rem;color:#0a2540}
+.hero p{max-width:700px;margin:1rem 0 2rem}
+.hero button{
+padding:.8rem 2rem;background:#0a2540;
+color:#fff;border:none;border-radius:5px
+}
+
+.box{max-width:900px;margin:auto;text-align:center}
+.cards{
+display:flex;flex-wrap:wrap;
+justify-content:center;gap:2rem
+}
+.card{
+background:#fff;width:260px;
+padding:2rem;border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,.1)
+}
+.card i{font-size:2rem;color:#00aaff;margin-bottom:1rem}
+
+.gray{background:#f9f9f9}
+
+.team{text-align:center}
+.team img{width:160px;border-radius:50%;margin-bottom:1rem}
+
+iframe{width:100%;height:750px;border:none}
+.thanks{margin-top:1rem;font-weight:bold;color:green}
+
+footer{
+background:#0a2540;color:#fff;
+text-align:center;padding:1.5rem
+}
+
+@media(max-width:768px){
+.cards{flex-direction:column;align-items:center}
+.hero h1{font-size:2.2rem}
+}
+</style>
 </head>
+
 <body>
-  <!-- Welcome Popup -->
-  <div id="welcomePopup">
-    <div>
-      <p>🙏 Welcome to VericureLab</p>
-    </div>
-  </div>
 
-  <nav>
-    <div class="logo">VericureLab</div>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#team">Team</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<div class="welcome">🙏 Welcome to VericureLab – Innovating Healthcare with AI</div>
 
-  <section class="hero" id="home">
-    <h1>Welcome to VericureLab</h1>
-    <p>Innovating HealthTech with AI-powered solutions to make diagnostics smarter, faster, and reliable.</p>
-    <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });">Get in Touch</button>
-  </section>
+<nav>
+<div><strong>VericureLab</strong></div>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#solution">Solution</a></li>
+<li><a href="#model">Business</a></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
 
-  <section class="about" id="about">
-    <h2>About Us</h2>
-    <div class="about-content">
-      <p>VericureLab is committed to transforming healthcare through advanced AI and cutting-edge diagnostic solutions. Our mission is to empower hospitals, labs, and patients with precise, fast, and reliable technology-driven insights.</p>
-    </div>
-  </section>
+<section class="hero" id="home">
+<h1>VericureLab</h1>
+<p>AI-powered HealthTech platform focused on improving diagnostic accuracy, trust, and automation.</p>
+<button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+</section>
 
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services">
-      <div class="service-card"><i class="fas fa-robot"></i><h3>AI Diagnostics</h3><p>Advanced algorithms to help detect diseases accurately and quickly.</p></div>
-      <div class="service-card"><i class="fas fa-flask"></i><h3>Lab Automation</h3><p>Streamlining laboratory processes with smart automation solutions.</p></div>
-      <div class="service-card"><i class="fas fa-chart-line"></i><h3>Health Analytics</h3><p>Providing actionable insights from patient data for better decision-making.</p></div>
-    </div>
-  </section>
+<section id="about" class="gray">
+<h2>About Us</h2>
+<div class="box">
+VericureLab is a HealthTech startup leveraging Artificial Intelligence to improve medical diagnostics, verification, and healthcare decision-making. Our goal is to reduce errors and build trust in healthcare systems.
+</div>
+</section>
 
-  <section id="team">
-    <h2>Meet Our Team</h2>
-    <div class="team">
-      <div class="member">
-        <img src="https://via.placeholder.com/200" alt="Founder">
-        <h4>Nital Kumar</h4>
-        <p>Founder & CEO</p>
-        <a href="https://www.linkedin.com/in/nitalkumar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      </div>
-    </div>
-  </section>
+<section id="problem">
+<h2>Problem We Are Solving</h2>
+<div class="box">
+• Fake or manipulated medical reports<br>
+• Manual diagnostic processes causing delays<br>
+• Human errors in lab verification<br>
+• Lack of trust in diagnostic data<br><br>
+These issues lead to wrong treatments, patient risk, and financial loss.
+</div>
+</section>
 
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <iframe id="googleForm" src="https://docs.google.com/forms/d/e/1FAIpQLSfvWcf9ERJfi80G1zus7Vg4qyYAH93S1Zowzmpq3H_32sjNuw/viewform?embedded=true" width="100%" height="741" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    <div id="thankMessage" class="thank-message">Thanks for connecting with us! Our team will reach you as soon as possible.</div>
-  </section>
+<section id="solution" class="gray">
+<h2>Our Solution – VericureLab</h2>
+<div class="box">
+VericureLab uses Artificial Intelligence to verify medical reports, automate lab workflows, detect inconsistencies, and provide intelligent insights to doctors and healthcare providers.
+</div>
+</section>
 
-  <footer>
-    <p>&copy; 2025 VericureLab | All Rights Reserved</p>
-  </footer>
+<section>
+<h2>Why Artificial Intelligence?</h2>
+<div class="cards">
+<div class="card"><i class="fas fa-brain"></i><p>Analyzes large medical data efficiently</p></div>
+<div class="card"><i class="fas fa-shield-alt"></i><p>Reduces human errors</p></div>
+<div class="card"><i class="fas fa-chart-line"></i><p>Improves accuracy over time</p></div>
+</div>
+</section>
 
-  <script>
-    // Auto-hide welcome popup after 3 seconds
-    window.onload = function() {
-      setTimeout(function() {
-        document.getElementById('welcomePopup').style.display = 'none';
-      }, 3000);
-    }
+<section id="model" class="gray">
+<h2>Business Model</h2>
+<div class="box">
+• Subscription plans for hospitals & labs<br>
+• Pay-per-analysis report verification<br>
+• Enterprise licensing<br>
+• API integrations for HealthTech platforms
+</div>
+</section>
 
-    // Show thank-you message after form submission
-    const formFrame = document.getElementById('googleForm');
-    const thankMsg = document.getElementById('thankMessage');
-    formFrame.onload = function() {
-      if(formFrame.src.includes('formResponse')) {
-        thankMsg.style.display = 'block';
-        formFrame.style.display = 'none';
-      }
-    }
-  </script>
+<section id="roadmap">
+<h2>Roadmap (12 Months)</h2>
+<div class="box">
+<b>0–3 Months:</b> MVP development & testing<br>
+<b>3–6 Months:</b> AI improvement & pilot labs<br>
+<b>6–12 Months:</b> Scale platform & hospital onboarding
+</div>
+</section>
+
+<section class="gray">
+<h2>Vision & Mission</h2>
+<div class="box">
+<b>Vision:</b> Build a trusted AI-powered healthcare ecosystem.<br><br>
+<b>Mission:</b> Reduce diagnostic errors and support healthcare professionals using AI.
+</div>
+</section>
+
+<section class="team">
+<h2>Founder</h2>
+<img src="https://via.placeholder.com/200">
+<h3>Nital Kumar</h3>
+<p>Founder & CEO – VericureLab</p>
+<a href="https://www.linkedin.com/in/nitalkumar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+<i class="fab fa-linkedin"></i> LinkedIn
+</a>
+</section>
+
+<section id="contact" class="gray">
+<h2>Contact Us</h2>
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvWcf9ERJfi80G1zus7Vg4qyYAH93S1Zowzmpq3H_32sjNuw/viewform?embedded=true"></iframe>
+
+<div class="thanks">
+Thanks for connecting with us! Our team will reach you as soon as possible.
+</div>
+</section>
+
+<footer>
+© 2025 VericureLab | All Rights Reserved
+</footer>
+
 </body>
 </html>
