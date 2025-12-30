@@ -5,144 +5,217 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VericureLab | HealthTech & AI</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Roboto,sans-serif;line-height:1.6;color:#333}
+body{
+  font-family:Poppins,sans-serif;
+  background:#f4f8ff;
+  color:#333;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
 a{text-decoration:none;color:inherit}
-section{padding:4rem 2rem}
-h2{text-align:center;margin-bottom:2rem;color:#0a2540}
 
+/* Navigation */
 nav{
-background:#0a2540;color:#fff;
-display:flex;justify-content:space-between;
-padding:1rem 2rem;position:sticky;top:0
+  position:sticky;top:0;z-index:1000;
+  background:rgba(10,37,64,0.95);
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  transition:0.3s;
 }
+nav:hover{background:rgba(10,37,64,1);}
 nav ul{list-style:none;display:flex}
-nav li{margin-left:1.2rem}
-nav a:hover{color:#00aaff}
+nav li{margin-left:1.5rem}
+nav a{transition:0.3s;font-weight:500}
+nav a:hover{color:#00c6ff;}
+.menu-toggle{display:none;font-size:1.8rem;cursor:pointer;color:#fff;}
 
+/* Welcome bar */
 .welcome{
-background:#00aaff;color:#fff;
-text-align:center;padding:.6rem;font-weight:bold
+  background:linear-gradient(to right,#00c6ff,#0072ff);
+  color:#fff;text-align:center;
+  padding:.8rem;font-weight:600;font-size:1rem;
 }
 
+/* Hero Section */
 .hero{
-height:90vh;display:flex;
-flex-direction:column;justify-content:center;
-align-items:center;text-align:center;
-background:linear-gradient(to right,#e1f0ff,#fff)
+  position:relative;
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  overflow:hidden;
+  background:linear-gradient(-45deg, #00c6ff, #0072ff, #00c6ff, #0072ff);
+  background-size:400% 400%;
+  animation:gradientBG 15s ease infinite;
 }
-.hero h1{font-size:2.8rem;color:#0a2540}
-.hero p{max-width:700px;margin:1rem 0 2rem}
+.hero h1{
+  font-size:3rem;
+  color:#fff;
+  animation:fadeInDown 1.2s, floatText 4s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+.hero p{
+  max-width:700px;
+  margin:1rem 0 2rem;
+  font-size:1.1rem;
+  animation:fadeInUp 1.4s, floatText 4s ease-in-out infinite;
+  color:#f0f8ff;
+  text-shadow:0 0 10px rgba(0,0,0,0.2);
+}
 .hero button{
-padding:.8rem 2rem;background:#0a2540;
-color:#fff;border:none;border-radius:5px
+  padding:.9rem 2.2rem;
+  background:#0a2540;color:#fff;border:none;border-radius:30px;
+  font-size:1rem;cursor:pointer;transition:.3s;animation:fadeInUp 1.6s;
+}
+.hero button:hover{
+  background:linear-gradient(to right,#00c6ff,#0072ff);
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(0,198,255,0.6);
 }
 
-.box{max-width:900px;margin:auto;text-align:center}
-.cards{
-display:flex;flex-wrap:wrap;
-justify-content:center;gap:2rem
-}
+/* Particle canvas */
+#particles{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
+#light-streak{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+
+/* Sections */
+section{padding:4rem 2rem}
+.gray{background:#f9fbff}
+h2{text-align:center;margin-bottom:2rem;color:#0a2540;position:relative;}
+h2::after{content:"";width:80px;height:3px;background:#00c6ff;display:block;margin:10px auto;border-radius:2px;}
+.box{max-width:900px;margin:auto;text-align:center;font-size:1.05rem;line-height:1.8;opacity:0;transform:translateY(30px);transition:all 1s ease;}
+
+/* Cards */
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;}
 .card{
-background:#fff;width:260px;
-padding:2rem;border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,.1)
+  background:#fff;width:260px;padding:2rem;border-radius:20px;
+  box-shadow:0 15px 30px rgba(0,0,0,.1);transition:.5s;
+  opacity:0;transform:translateY(30px) scale(0.9);
 }
-.card i{font-size:2rem;color:#00aaff;margin-bottom:1rem}
+.card.show{transform:translateY(0) scale(1);opacity:1;}
+.card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 20px 40px rgba(0,0,0,.2);}
+.card i{font-size:2.2rem;color:#0072ff;margin-bottom:1rem;}
 
-.gray{background:#f9f9f9}
-
-.team{text-align:center}
-.team img{width:160px;border-radius:50%;margin-bottom:1rem}
-
-iframe{width:100%;height:750px;border:none}
-.thanks{margin-top:1rem;font-weight:bold;color:green}
-
-footer{
-background:#0a2540;color:#fff;
-text-align:center;padding:1.5rem
+/* Team Section */
+.team{text-align:center;background:linear-gradient(to right,#eaf4ff,#ffffff);}
+.team-grid{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.member{
+  background:#fff;padding:2rem;border-radius:20px;width:260px;
+  box-shadow:0 15px 30px rgba(0,0,0,.15);transition:.5s;
+  opacity:0;transform:translateY(30px);
 }
+.member.show{opacity:1;transform:translateY(0);}
+.member:hover{transform:scale(1.05); box-shadow:0 25px 50px rgba(0,0,0,.25);}
+.member img{width:180px;height:180px;border-radius:50%;object-fit:cover;margin-bottom:1rem;box-shadow:0 10px 25px rgba(0,0,0,.3);}
+.member h3{margin:.5rem 0;font-weight:600;}
+.member a{color:#0072ff;font-weight:600;}
 
+/* Contact */
+iframe{width:100%;height:750px;border:none;border-radius:15px}
+.thanks{margin-top:1rem;font-weight:600;color:green;text-align:center;opacity:0;transform:translateY(30px);transition:all 1s ease;}
+
+/* Footer */
+footer{background:#0a2540;color:#fff;text-align:center;padding:1.5rem;opacity:0;transform:translateY(20px);transition:all 1s ease;}
+footer.show{opacity:1;transform:translateY(0);}
+
+/* Animations */
+@keyframes gradientBG{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes floatText{0%{transform:translateY(0px)}50%{transform:translateY(-10px)}100%{transform:translateY(0px)}}
+@keyframes photoPop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes streakMove{0%{transform:translateX(-100%) rotate(20deg);opacity:0}50%{opacity:0.7}100%{transform:translateX(100%) rotate(20deg);opacity:0}}
+
+/* Responsive */
 @media(max-width:768px){
-.cards{flex-direction:column;align-items:center}
 .hero h1{font-size:2.2rem}
+nav ul{display:none;flex-direction:column;background:rgba(10,37,64,0.95);position:absolute;top:60px;right:0;width:200px;padding:1rem;}
+nav ul.show{display:flex}
+nav li{margin:1rem 0}
+.menu-toggle{display:block;color:#fff;font-size:1.5rem;cursor:pointer;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="welcome">🙏 Welcome to VericureLab – Innovating Healthcare with AI</div>
+<div class="welcome">🚀 Welcome to VericureLab – AI Powered Healthcare Innovation</div>
 
 <nav>
-<div><strong>VericureLab</strong></div>
-<ul>
+<strong>VericureLab</strong>
+<div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+<ul id="nav-menu">
 <li><a href="#home">Home</a></li>
 <li><a href="#about">About</a></li>
-<li><a href="#problem">Problem</a></li>
 <li><a href="#solution">Solution</a></li>
 <li><a href="#model">Business</a></li>
+<li><a href="#team">Team</a></li>
 <li><a href="#roadmap">Roadmap</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
 </nav>
 
 <section class="hero" id="home">
+<canvas id="particles"></canvas>
+<canvas id="light-streak"></canvas>
 <h1>VericureLab</h1>
-<p>AI-powered HealthTech platform focused on improving diagnostic accuracy, trust, and automation.</p>
-<button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+<p>AI-driven HealthTech platform ensuring trust, accuracy, and automation in medical diagnostics.</p>
+<button onclick="document.getElementById('contact').scrollIntoView()">Contact Us</button>
 </section>
 
 <section id="about" class="gray">
 <h2>About Us</h2>
-<div class="box">
-VericureLab is a HealthTech startup leveraging Artificial Intelligence to improve medical diagnostics, verification, and healthcare decision-making. Our goal is to reduce errors and build trust in healthcare systems.
-</div>
+<div class="box">VericureLab is a next-generation HealthTech startup using AI to verify medical reports, reduce diagnostic errors, and improve healthcare decision-making.</div>
 </section>
 
-<section id="problem">
-<h2>Problem We Are Solving</h2>
-<div class="box">
-• Fake or manipulated medical reports<br>
-• Manual diagnostic processes causing delays<br>
-• Human errors in lab verification<br>
-• Lack of trust in diagnostic data<br><br>
-These issues lead to wrong treatments, patient risk, and financial loss.
-</div>
-</section>
-
-<section id="solution" class="gray">
-<h2>Our Solution – VericureLab</h2>
-<div class="box">
-VericureLab uses Artificial Intelligence to verify medical reports, automate lab workflows, detect inconsistencies, and provide intelligent insights to doctors and healthcare providers.
-</div>
-</section>
-
-<section>
-<h2>Why Artificial Intelligence?</h2>
+<section id="solution">
+<h2>Why VericureLab?</h2>
 <div class="cards">
-<div class="card"><i class="fas fa-brain"></i><p>Analyzes large medical data efficiently</p></div>
-<div class="card"><i class="fas fa-shield-alt"></i><p>Reduces human errors</p></div>
-<div class="card"><i class="fas fa-chart-line"></i><p>Improves accuracy over time</p></div>
+<div class="card"><i class="fas fa-brain"></i><p>AI-powered report verification</p></div>
+<div class="card"><i class="fas fa-shield-alt"></i><p>Eliminates fake & manipulated reports</p></div>
+<div class="card"><i class="fas fa-hospital"></i><p>Designed for hospitals & labs</p></div>
 </div>
 </section>
 
 <section id="model" class="gray">
 <h2>Business Model</h2>
-<div class="box">
-• Subscription plans for hospitals & labs<br>
-• Pay-per-analysis report verification<br>
-• Enterprise licensing<br>
-• API integrations for HealthTech platforms
+<div class="box">• SaaS subscriptions for hospitals & labs<br>• Pay-per-report verification<br>• Enterprise licensing & APIs</div>
+</section>
+
+<section id="team" class="team">
+<h2>Founding Team</h2>
+<div class="team-grid">
+<div class="member">
+<img src="https://raw.githubusercontent.com/nitalkumar773-creator/vericurelab/main/founder.png" alt="Nital Kumar">
+<h3>Nital Kumar</h3>
+<p>Founder & CEO</p>
+<a href="https://www.linkedin.com/in/nitalkumar" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+</div>
+<div class="member">
+<img src="https://raw.githubusercontent.com/nitalkumar773-creator/vericurelab/main/cofounder.jpg" alt="Om Kumar Gupta">
+<h3>Om Kumar Gupta</h3>
+<p>Co-Founder</p>
+<a href="https://www.linkedin.com/in/om-kumar-gupta-11b192328" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+</div>
 </div>
 </section>
 
-<section id="roadmap">
-<h2>Roadmap (12 Months)</h2>
+<section id="roadmap" class="gray">
+<h2>Roadmap</h2>
 <div class="box">
 <b>0–3 Months:</b> MVP development & testing<br>
 <b>3–6 Months:</b> AI improvement & pilot labs<br>
@@ -150,37 +223,100 @@ VericureLab uses Artificial Intelligence to verify medical reports, automate lab
 </div>
 </section>
 
-<section class="gray">
-<h2>Vision & Mission</h2>
-<div class="box">
-<b>Vision:</b> Build a trusted AI-powered healthcare ecosystem.<br><br>
-<b>Mission:</b> Reduce diagnostic errors and support healthcare professionals using AI.
-</div>
-</section>
-
-<section class="team">
-<h2>Founder</h2>
-<img src="https://via.placeholder.com/200">
-<h3>Nital Kumar</h3>
-<p>Founder & CEO – VericureLab</p>
-<a href="https://www.linkedin.com/in/nitalkumar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-<i class="fab fa-linkedin"></i> LinkedIn
-</a>
-</section>
-
-<section id="contact" class="gray">
+<section id="contact">
 <h2>Contact Us</h2>
-
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvWcf9ERJfi80G1zus7Vg4qyYAH93S1Zowzmpq3H_32sjNuw/viewform?embedded=true"></iframe>
-
-<div class="thanks">
-Thanks for visiting our site if you need any help you can connect with us! Our team will reach you as soon as possible.
-</div>
+<div class="thanks">Thank you for visiting our website VericureLab for any query fill up contact form so 🚀 Our team will reach you as soon as possible !</div>
 </section>
 
-<footer>
-© 2025 VericureLab | All Rights Reserved
-</footer>
+<footer>© 2025 VericureLab | HealthTech & AI Innovation</footer>
+
+<script>
+// Mobile menu toggle
+function toggleMenu(){document.getElementById('nav-menu').classList.toggle('show');}
+
+// Scroll reveal animations
+const boxes = document.querySelectorAll('.box, .card, .member, .thanks');
+const cards = document.querySelectorAll('.card');
+const teamMembers = document.querySelectorAll('.member');
+const footer = document.querySelector('footer');
+
+function scrollReveal() {
+  const triggerBottom = window.innerHeight / 5 * 4;
+
+  boxes.forEach(box => {
+    const boxTop = box.getBoundingClientRect().top;
+    if(boxTop < triggerBottom){
+      box.style.opacity='1';
+      box.style.transform='translateY(0)';
+    }
+  });
+
+  cards.forEach((card, index) => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < triggerBottom){
+      setTimeout(()=> card.classList.add('show'), index * 200);
+    }
+  });
+
+  teamMembers.forEach((member, index) => {
+    const memberTop = member.getBoundingClientRect().top;
+    if(memberTop < triggerBottom){
+      setTimeout(()=> member.classList.add('show'), index * 300);
+    }
+  });
+
+  const footerTop = footer.getBoundingClientRect().top;
+  if(footerTop < triggerBottom){
+    footer.classList.add('show');
+  }
+}
+
+window.addEventListener('scroll', scrollReveal);
+scrollReveal();
+
+// Particle animation
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight*0.9;
+let particlesArray = [];
+class Particle{
+  constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*3+1;this.speedX=Math.random()*1-0.5;this.speedY=Math.random()*1-0.5;}
+  update(){this.x+=this.speedX; this.y+=this.speedY; if(this.size>0.2)this.size-=0.02;}
+  draw(){ctx.fillStyle='rgba(255,255,255,0.6)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();}
+}
+function init(){particlesArray=[];for(let i=0;i<100;i++){particlesArray.push(new Particle());}}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particlesArray.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+init();animate();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight*0.9;init();});
+
+// Light streak animation
+const streakCanvas = document.getElementById('light-streak');
+const streakCtx = streakCanvas.getContext('2d');
+streakCanvas.width = window.innerWidth;
+streakCanvas.height = window.innerHeight*0.9;
+let streaks = [];
+for(let i=0;i<6;i++){
+  streaks.push({x:-200,y:Math.random()*streakCanvas.height,length:Math.random()*400+200,speed:Math.random()*2+1});
+}
+function animateStreaks(){
+  streakCtx.clearRect(0,0,streakCanvas.width,streakCanvas.height);
+  streakCtx.strokeStyle='rgba(255,255,255,0.15)';
+  streakCtx.lineWidth=4;
+  streaks.forEach(s=>{
+    streakCtx.beginPath();
+    streakCtx.moveTo(s.x,s.y);
+    streakCtx.lineTo(s.x+s.length,s.y-50);
+    streakCtx.stroke();
+    s.x += s.speed;
+    if(s.x>streakCanvas.width+200)s.x=-200;s.y=Math.random()*streakCanvas.height;
+  });
+  requestAnimationFrame(animateStreaks);
+}
+animateStreaks();
+window.addEventListener('resize',()=>{streakCanvas.width=window.innerWidth;streakCanvas.height=window.innerHeight*0.9;});
+</script>
 
 </body>
-</html>
+</html
