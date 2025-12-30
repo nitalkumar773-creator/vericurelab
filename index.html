@@ -10,313 +10,188 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Poppins,sans-serif;
-  background:#f4f8ff;
-  color:#333;
-  scroll-behavior:smooth;
-  overflow-x:hidden;
-}
+body{font-family:Poppins,sans-serif;background:#f4f8ff;color:#333;scroll-behavior:smooth;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-
-/* Navigation */
-nav{
-  position:sticky;top:0;z-index:1000;
-  background:rgba(10,37,64,0.95);
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:1rem 2rem;
-  transition:0.3s;
-}
-nav:hover{background:rgba(10,37,64,1);}
-nav ul{list-style:none;display:flex}
-nav li{margin-left:1.5rem}
-nav a{transition:0.3s;font-weight:500}
-nav a:hover{color:#00c6ff;}
-.menu-toggle{display:none;font-size:1.8rem;cursor:pointer;color:#fff;}
-
-/* Welcome bar */
-.welcome{
-  background:linear-gradient(to right,#00c6ff,#0072ff);
-  color:#fff;text-align:center;
-  padding:.8rem;font-weight:600;font-size:1rem;
-}
-
-/* Hero Section */
-.hero{
-  position:relative;
-  height:90vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  overflow:hidden;
-  background:linear-gradient(-45deg, #00c6ff, #0072ff, #00c6ff, #0072ff);
-  background-size:400% 400%;
-  animation:gradientBG 15s ease infinite;
-}
-.hero h1{
-  font-size:3rem;
-  color:#fff;
-  animation:fadeInDown 1.2s, floatText 4s ease-in-out infinite;
-  text-shadow: 0 0 20px rgba(255,255,255,0.5);
-}
-.hero p{
-  max-width:700px;
-  margin:1rem 0 2rem;
-  font-size:1.1rem;
-  animation:fadeInUp 1.4s, floatText 4s ease-in-out infinite;
-  color:#f0f8ff;
-  text-shadow:0 0 10px rgba(0,0,0,0.2);
-}
-.hero button{
-  padding:.9rem 2.2rem;
-  background:#0a2540;color:#fff;border:none;border-radius:30px;
-  font-size:1rem;cursor:pointer;transition:.3s;animation:fadeInUp 1.6s;
-}
-.hero button:hover{
-  background:linear-gradient(to right,#00c6ff,#0072ff);
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(0,198,255,0.6);
-}
-
-/* Particle canvas */
-#particles{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
-#light-streak{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
-
-/* Sections */
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,37,64,0.95);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;flex-wrap:wrap}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:1.5rem}
+nav li{}
+nav a:hover{color:#00c6ff}
+.menu-toggle{display:none;font-size:1.8rem;cursor:pointer}
+.welcome{background:linear-gradient(to right,#00c6ff,#0072ff);color:#fff;text-align:center;padding:.8rem;font-weight:600}
+.hero{height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(-45deg,#00c6ff,#0072ff,#00c6ff,#0072ff);background-size:400% 400%;animation:gradientBG 15s ease infinite;position:relative;overflow:hidden}
+.hero h1{font-size:3rem;color:#fff}
+.hero p{max-width:750px;color:#f0f8ff;margin:1rem 0}
+.hero button{padding:.9rem 2.2rem;border-radius:30px;border:none;background:#0a2540;color:#fff;cursor:pointer}
 section{padding:4rem 2rem}
 .gray{background:#f9fbff}
-h2{text-align:center;margin-bottom:2rem;color:#0a2540;position:relative;}
-h2::after{content:"";width:80px;height:3px;background:#00c6ff;display:block;margin:10px auto;border-radius:2px;}
-.box{max-width:900px;margin:auto;text-align:center;font-size:1.05rem;line-height:1.8;opacity:0;transform:translateY(30px);transition:all 1s ease;}
-
-/* Cards */
-.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;}
-.card{
-  background:#fff;width:260px;padding:2rem;border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,.1);transition:.5s;
-  opacity:0;transform:translateY(30px) scale(0.9);
-}
-.card.show{transform:translateY(0) scale(1);opacity:1;}
-.card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 20px 40px rgba(0,0,0,.2);}
-.card i{font-size:2.2rem;color:#0072ff;margin-bottom:1rem;}
-
-/* Team Section */
-.team{text-align:center;background:linear-gradient(to right,#eaf4ff,#ffffff);}
-.team-grid{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
-.member{
-  background:#fff;padding:2rem;border-radius:20px;width:260px;
-  box-shadow:0 15px 30px rgba(0,0,0,.15);transition:.5s;
-  opacity:0;transform:translateY(30px);
-}
-.member.show{opacity:1;transform:translateY(0);}
-.member:hover{transform:scale(1.05); box-shadow:0 25px 50px rgba(0,0,0,.25);}
-.member img{width:180px;height:180px;border-radius:50%;object-fit:cover;margin-bottom:1rem;box-shadow:0 10px 25px rgba(0,0,0,.3);}
-.member h3{margin:.5rem 0;font-weight:600;}
-.member a{color:#0072ff;font-weight:600;}
-
-/* Contact */
-iframe{width:100%;height:750px;border:none;border-radius:15px}
-.thanks{margin-top:1rem;font-weight:600;color:green;text-align:center;opacity:0;transform:translateY(30px);transition:all 1s ease;}
-
-/* Footer */
-footer{background:#0a2540;color:#fff;text-align:center;padding:1.5rem;opacity:0;transform:translateY(20px);transition:all 1s ease;}
-footer.show{opacity:1;transform:translateY(0);}
-
-/* Animations */
-@keyframes gradientBG{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-@keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes floatText{0%{transform:translateY(0px)}50%{transform:translateY(-10px)}100%{transform:translateY(0px)}}
-@keyframes photoPop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
-@keyframes streakMove{0%{transform:translateX(-100%) rotate(20deg);opacity:0}50%{opacity:0.7}100%{transform:translateX(100%) rotate(20deg);opacity:0}}
-
-/* Responsive */
-@media(max-width:768px){
-.hero h1{font-size:2.2rem}
-nav ul{display:none;flex-direction:column;background:rgba(10,37,64,0.95);position:absolute;top:60px;right:0;width:200px;padding:1rem;}
-nav ul.show{display:flex}
-nav li{margin:1rem 0}
-.menu-toggle{display:block;color:#fff;font-size:1.5rem;cursor:pointer;}
-}
+h2{text-align:center;margin-bottom:2rem;color:#0a2540}
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem}
+.card{background:#fff;width:260px;padding:2rem;border-radius:20px;box-shadow:0 15px 30px rgba(0,0,0,.1);text-align:center;transition:transform 0.3s, box-shadow 0.3s}
+.card:hover{transform:translateY(-10px);box-shadow:0 25px 40px rgba(0,0,0,.15)}
+.card i{font-size:2.2rem;color:#0072ff;margin-bottom:1rem}
+.box{max-width:900px;margin:auto;text-align:center;line-height:1.8}
+.team{background:linear-gradient(to right,#eaf4ff,#fff)}
+.team-grid{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.member{background:#fff;padding:2rem;border-radius:20px;width:260px;text-align:center;box-shadow:0 15px 30px rgba(0,0,0,.15);transition:transform 0.3s, box-shadow 0.3s}
+.member:hover{transform:translateY(-10px);box-shadow:0 25px 40px rgba(0,0,0,.15)}
+.member img{width:160px;height:160px;border-radius:50%}
+.member h3{margin:1rem 0 0.5rem 0;color:#0a2540}
+.member p{margin-bottom:0.5rem;color:#333}
+.member a{margin:0 0.3rem;color:#0072ff;font-size:1.2rem}
+.member a:hover{color:#00c6ff}
+footer{background:#0a2540;color:#fff;text-align:center;padding:1.5rem}
+iframe{width:100%;border:none;border-radius:10px;min-height:600px;}
+@keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.particle{position:absolute;border-radius:50%;opacity:0.6;animation:float linear infinite;pointer-events:none}
+@keyframes float{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(-1000px) rotate(360deg);}}
+@media(max-width:768px){nav ul{max-height:0;overflow:hidden;flex-direction:column;width:100%;background:rgba(10,37,64,0.95);margin-top:0.5rem;padding:0;border-radius:10px;transition:max-height 0.4s ease-in-out,padding 0.4s ease-in-out}nav ul.show{max-height:500px;padding:1rem 0}nav li{margin:0.5rem 0;text-align:center}.menu-toggle{display:block;color:#fff}.hero h1{font-size:2.2rem}.cards,.team-grid{flex-direction:column;align-items:center}}
 </style>
 </head>
 
 <body>
 
-<div class="welcome">🚀 Welcome to VericureLab – AI Powered Healthcare Innovation</div>
+<div class="welcome">🚀 Welcome to VericureLab — AI Powered Healthcare Innovation</div>
 
 <nav>
 <strong>VericureLab</strong>
-<div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-<ul id="nav-menu">
+<i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
+<ul id="nav-links">
 <li><a href="#home">Home</a></li>
 <li><a href="#about">About</a></li>
 <li><a href="#solution">Solution</a></li>
 <li><a href="#model">Business</a></li>
+<li><a href="#vision">Vision</a></li>
 <li><a href="#team">Team</a></li>
-<li><a href="#roadmap">Roadmap</a></li>
 <li><a href="#contact">Contact</a></li>
+<li><a href="#reachus">Reach Us</a></li>
 </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="home">
-<canvas id="particles"></canvas>
-<canvas id="light-streak"></canvas>
-<h1>VericureLab</h1>
-<p>AI-driven HealthTech platform ensuring trust, accuracy, and automation in medical diagnostics.</p>
+<h1>🚀 VericureLab</h1>
+<p><b>AI-Driven HealthTech for Trusted Medical Diagnostics</b><br>Trust. Accuracy. Automation.</p>
+<p>VericureLab uses AI to verify medical reports, eliminate diagnostic fraud, and help healthcare providers make faster, smarter decisions.</p>
 <button onclick="document.getElementById('contact').scrollIntoView()">Contact Us</button>
+
+<div class="particle" style="width:15px;height:15px;left:10%;background:#fff;animation-duration:12s;"></div>
+<div class="particle" style="width:20px;height:20px;left:70%;background:#00c6ff;animation-duration:15s;"></div>
+<div class="particle" style="width:10px;height:10px;left:40%;background:#0072ff;animation-duration:18s;"></div>
+<div class="particle" style="width:12px;height:12px;left:85%;background:#fff;animation-duration:20s;"></div>
 </section>
 
+<!-- ABOUT -->
 <section id="about" class="gray">
-<h2>About Us</h2>
-<div class="box">VericureLab is a next-generation HealthTech startup using AI to verify medical reports, reduce diagnostic errors, and improve healthcare decision-making.</div>
-</section>
-
-<section id="solution">
-<h2>Why VericureLab?</h2>
+<h2>🧬 About VericureLab</h2>
 <div class="cards">
-<div class="card"><i class="fas fa-brain"></i><p>AI-powered report verification</p></div>
-<div class="card"><i class="fas fa-shield-alt"></i><p>Eliminates fake & manipulated reports</p></div>
-<div class="card"><i class="fas fa-hospital"></i><p>Designed for hospitals & labs</p></div>
+<div class="card"><i class="fas fa-hospital"></i><p><b>Next-Gen HealthTech Startup</b><br>AI-powered platform for modern diagnostics</p></div>
+<div class="card"><i class="fas fa-brain"></i><p><b>Smart Report Verification</b><br>Detects errors & inconsistencies</p></div>
+<div class="card"><i class="fas fa-shield-alt"></i><p><b>Secure & Reliable</b><br>Ensures data integrity & trust</p></div>
+<div class="card"><i class="fas fa-bolt"></i><p><b>Faster Decisions</b><br>Reduces manual work & delays</p></div>
 </div>
 </section>
 
-<section id="model" class="gray">
-<h2>Business Model</h2>
-<div class="box">• SaaS subscriptions for hospitals & labs<br>• Pay-per-report verification<br>• Enterprise licensing & APIs</div>
+<!-- WHY -->
+<section id="solution">
+<h2>⭐ Why VericureLab?</h2>
+<div class="cards">
+<div class="card"><i class="fas fa-robot"></i><p>AI-powered verification</p></div>
+<div class="card"><i class="fas fa-ban"></i><p>Fake & manipulated report detection</p></div>
+<div class="card"><i class="fas fa-hospital-user"></i><p>Built for hospitals & labs</p></div>
+<div class="card"><i class="fas fa-chart-line"></i><p>Standardized & error-free results</p></div>
+<div class="card"><i class="fas fa-clock"></i><p>Faster turnaround time</p></div>
+</div>
 </section>
 
+<!-- BUSINESS -->
+<section id="model" class="gray">
+<h2>💼 Business Model</h2>
+<div class="cards">
+<div class="card"><i class="fas fa-cloud"></i><p>SaaS subscriptions</p></div>
+<div class="card"><i class="fas fa-file-medical"></i><p>Pay-per-report verification</p></div>
+<div class="card"><i class="fas fa-plug"></i><p>Enterprise APIs & licensing</p></div>
+</div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+<h2>🌍 Our Vision</h2>
+<div class="cards">
+<div class="card"><i class="fas fa-check-circle"></i><p>One trusted diagnostic platform</p></div>
+<div class="card"><i class="fas fa-flag"></i><p>Healthcare at national scale</p></div>
+<div class="card"><i class="fas fa-rocket"></i><p>Future-ready AI innovation</p></div>
+</div>
+</section>
+
+<!-- TEAM -->
 <section id="team" class="team">
-<h2>Founding Team</h2>
+<h2>👥 Founding Team</h2>
 <div class="team-grid">
 <div class="member">
-<img src="https://raw.githubusercontent.com/nitalkumar773-creator/vericurelab/main/founder.png" alt="Nital Kumar">
+<img src="https://raw.githubusercontent.com/nitalkumar773-creator/vericurelab/main/founder.png">
 <h3>Nital Kumar</h3>
 <p>Founder & CEO</p>
-<a href="https://www.linkedin.com/in/nitalkumar" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+<a href="https://www.linkedin.com/in/nitalkumar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
 </div>
 <div class="member">
-<img src="https://raw.githubusercontent.com/nitalkumar773-creator/vericurelab/main/cofounder.jpg" alt="Om Kumar Gupta">
+<img src="https://raw.githubusercontent.com/nitalkumar773-creator/vericurelab/main/cofounder.jpg">
 <h3>Om Kumar Gupta</h3>
 <p>Co-Founder</p>
-<a href="https://www.linkedin.com/in/om-kumar-gupta-11b192328" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+<a href="https://www.linkedin.com/in/om-kumar-gupta-11b192328" target="_blank"><i class="fab fa-linkedin"></i></a>
 </div>
 </div>
 </section>
 
-<section id="roadmap" class="gray">
-<h2>Roadmap</h2>
+<!-- CONTACT -->
+<section id="contact" class="gray">
+<h2>📩 Contact Us</h2>
 <div class="box">
-<b>0–3 Months:</b> MVP development & testing<br>
-<b>3–6 Months:</b> AI improvement & pilot labs<br>
-<b>6–12 Months:</b> Scale platform & hospital onboarding
+<b>Let’s Build Trusted Healthcare Together</b><br>
+Partner with VericureLab to bring accuracy and trust into diagnostics.
 </div>
 </section>
 
-<section id="contact">
-<h2>Contact Us</h2>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvWcf9ERJfi80G1zus7Vg4qyYAH93S1Zowzmpq3H_32sjNuw/viewform?embedded=true"></iframe>
-<div class="thanks">Thank you for visiting our website VericureLab for any query fill up contact form so 🚀 Our team will reach you as soon as possible !</div>
+<!-- GOOGLE FORM REACH US -->
+<section id="reachus">
+<h2>📬 Reach Us</h2>
+<div class="box">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvWcf9ERJfi80G1zus7Vg4qyYAH93S1Zowzmpq3H_32sjNuw/viewform?embedded=true" frameborder="0" allowfullscreen></iframe>
+</div>
 </section>
 
-<footer>© 2025 VericureLab | HealthTech & AI Innovation</footer>
+<footer>© 2025 VericureLab | AI-Powered HealthTech Innovation</footer>
 
 <script>
-// Mobile menu toggle
-function toggleMenu(){document.getElementById('nav-menu').classList.toggle('show');}
-
-// Scroll reveal animations
-const boxes = document.querySelectorAll('.box, .card, .member, .thanks');
-const cards = document.querySelectorAll('.card');
-const teamMembers = document.querySelectorAll('.member');
-const footer = document.querySelector('footer');
-
-function scrollReveal() {
-  const triggerBottom = window.innerHeight / 5 * 4;
-
-  boxes.forEach(box => {
-    const boxTop = box.getBoundingClientRect().top;
-    if(boxTop < triggerBottom){
-      box.style.opacity='1';
-      box.style.transform='translateY(0)';
-    }
-  });
-
-  cards.forEach((card, index) => {
-    const cardTop = card.getBoundingClientRect().top;
-    if(cardTop < triggerBottom){
-      setTimeout(()=> card.classList.add('show'), index * 200);
-    }
-  });
-
-  teamMembers.forEach((member, index) => {
-    const memberTop = member.getBoundingClientRect().top;
-    if(memberTop < triggerBottom){
-      setTimeout(()=> member.classList.add('show'), index * 300);
-    }
-  });
-
-  const footerTop = footer.getBoundingClientRect().top;
-  if(footerTop < triggerBottom){
-    footer.classList.add('show');
-  }
+function toggleMenu() {
+  const nav = document.getElementById('nav-links');
+  nav.classList.toggle('show');
 }
 
-window.addEventListener('scroll', scrollReveal);
-scrollReveal();
-
-// Particle animation
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight*0.9;
-let particlesArray = [];
-class Particle{
-  constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*3+1;this.speedX=Math.random()*1-0.5;this.speedY=Math.random()*1-0.5;}
-  update(){this.x+=this.speedX; this.y+=this.speedY; if(this.size>0.2)this.size-=0.02;}
-  draw(){ctx.fillStyle='rgba(255,255,255,0.6)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();}
-}
-function init(){particlesArray=[];for(let i=0;i<100;i++){particlesArray.push(new Particle());}}
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particlesArray.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
-init();animate();
-window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight*0.9;init();});
-
-// Light streak animation
-const streakCanvas = document.getElementById('light-streak');
-const streakCtx = streakCanvas.getContext('2d');
-streakCanvas.width = window.innerWidth;
-streakCanvas.height = window.innerHeight*0.9;
-let streaks = [];
-for(let i=0;i<6;i++){
-  streaks.push({x:-200,y:Math.random()*streakCanvas.height,length:Math.random()*400+200,speed:Math.random()*2+1});
-}
-function animateStreaks(){
-  streakCtx.clearRect(0,0,streakCanvas.width,streakCanvas.height);
-  streakCtx.strokeStyle='rgba(255,255,255,0.15)';
-  streakCtx.lineWidth=4;
-  streaks.forEach(s=>{
-    streakCtx.beginPath();
-    streakCtx.moveTo(s.x,s.y);
-    streakCtx.lineTo(s.x+s.length,s.y-50);
-    streakCtx.stroke();
-    s.x += s.speed;
-    if(s.x>streakCanvas.width+200)s.x=-200;s.y=Math.random()*streakCanvas.height;
+// Particle movement
+const particles = document.querySelectorAll('.particle');
+document.addEventListener('mousemove', e => {
+  particles.forEach(p => {
+    const speed = parseFloat(p.style.width)/20;
+    const x = (e.clientX - window.innerWidth/2) * speed / 50;
+    const y = (e.clientY - window.innerHeight/2) * speed / 50;
+    p.style.transform = `translate(${x}px, ${y}px)`;
   });
-  requestAnimationFrame(animateStreaks);
-}
-animateStreaks();
-window.addEventListener('resize',()=>{streakCanvas.width=window.innerWidth;streakCanvas.height=window.innerHeight*0.9;});
+});
 </script>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6953e041f28eaa197bc1b407/1jdnq810f';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 </body>
-</html
+</html>
